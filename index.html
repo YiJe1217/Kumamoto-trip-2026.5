@@ -41,19 +41,6 @@
             position: relative;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .header p {
-            margin: 10px 0 0 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        /* --- 新增的標題圖片樣式 --- */
         .header-title-img {
             max-width: 85%;       /* 確保在手機上不會太大超出螢幕 */
             height: auto;
@@ -61,8 +48,14 @@
             margin: 0 auto 12px;  /* 讓圖片置中，並與下方的日期保持一點距離 */
             display: block;       /* 確保置中設定生效 */
             
-            /* 【魔法濾鏡】把黑色的字體反轉成白色，並加上一點立體陰影 */
+            /* 【魔法濾鏡】現在只會作用在黑色的字體上，把其反轉成白色，並加上一點淡淡的陰影 */
             filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         .container {
@@ -71,7 +64,7 @@
             margin: 0 auto;
         }
 
-        /* 匯率計算器模組升級 */
+        /* 匯率計算器模組 */
         .converter-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -102,7 +95,7 @@
             margin-bottom: 12px;
             background: var(--bg-color);
             border-radius: 12px;
-            padding: 10px 16px;
+            padding: 10px 166px;
             border: 1px solid var(--timeline-color);
         }
 
@@ -126,7 +119,7 @@
         .result-group {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 12px 166px;
             background: #FFF3E0;
             border-radius: 12px;
             color: #E65100;
@@ -276,7 +269,7 @@
 <body>
 
     <div class="header">
-        <img src="title.png" alt="熊本旅遊" class="header-title-img">
+        <img src="title_tr.png" alt="熊本旅遊" class="header-title-img">
         <p>2026.04.29 - 05.03 | 熊本 • 阿蘇 • 八女 • 福岡</p>
     </div>
 
@@ -463,7 +456,7 @@
                     <div class="event">
                         <span class="time">09:20</span>
                         <span class="title">🚘 辦理還車手續</span>
-                        <span class="note">機場周邊租車營業所完成還車。</span>
+                        <span class="note">於機場周邊租車營業所完成還車。</span>
                     </div>
                     <div class="event">
                         <span class="time">11:55</span>
