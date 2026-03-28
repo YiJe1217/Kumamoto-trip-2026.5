@@ -64,7 +64,7 @@
             background: var(--card-bg);
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             border-top: 4px solid var(--primary-color);
         }
@@ -126,8 +126,102 @@
             margin-left: auto;
         }
 
+        /* 機票區塊專屬樣式 */
+        details.tickets {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        details.tickets summary {
+            padding: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-main);
+        }
+
+        details.tickets .content {
+            padding: 0 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 圖片縮圖樣式 */
+        .ticket-thumb-container {
+            display: block;
+            cursor: pointer;
+        }
+
+        .ticket-thumb {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .ticket-thumb:active {
+            transform: scale(0.98);
+        }
+
+        /* Lightbox 功能樣式 */
+        .lightbox-zoom {
+            display: none; /* 隱藏 Checkbox */
+        }
+
+        .lightbox {
+            display: none; /* 預設隱藏 Lightbox */
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-zoom:checked + label .lightbox {
+            display: block; /* 當 Checkbox 被選中時，顯示 Lightbox */
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-lightbox:hover {
+            color: #bbb;
+            text-decoration: none;
+        }
+
         /* 手風琴卡片設計 */
-        details {
+        details.agenda {
             background: var(--card-bg);
             border-radius: 16px;
             margin-bottom: 16px;
@@ -136,7 +230,7 @@
             transition: all 0.3s ease;
         }
 
-        details[open] {
+        details.agenda[open] {
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
             margin-bottom: 24px;
         }
@@ -167,7 +261,11 @@
             transition: transform 0.3s ease;
         }
 
-        details[open] summary::after {
+        details.agenda[open] summary::after {
+            transform: translateY(2px) rotate(-135deg);
+        }
+
+        details.tickets[open] summary::after {
             transform: translateY(2px) rotate(-135deg);
         }
 
@@ -256,6 +354,13 @@
             margin-left: 8px;
             vertical-align: middle;
         }
+
+        /* 小螢幕調整 */
+        @media only screen and (max-width: 700px) {
+            .lightbox-content {
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -284,7 +389,36 @@
             </div>
         </div>
 
-        <details>
+        <details class="tickets">
+            <summary>✈️ 機票航班資訊 (點擊展開)</summary>
+            <div class="content tickets-container">
+                <p class="note">點擊圖片可放大查看。</p>
+                
+                <div class="ticket">
+                    <input type="checkbox" id="lightbox-zoom-1" class="lightbox-zoom">
+                    <label for="lightbox-zoom-1" class="ticket-thumb-container">
+                        <img src="image_10.png" alt="機票 1" class="ticket-thumb">
+                        <div class="lightbox">
+                            <span class="close-lightbox" for="lightbox-zoom-1">&times;</span>
+                            <img src="image_10.png" alt="機票 1 放大" class="lightbox-content">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="ticket">
+                    <input type="checkbox" id="lightbox-zoom-2" class="lightbox-zoom">
+                    <label for="lightbox-zoom-2" class="ticket-thumb-container">
+                        <img src="image_11.png" alt="機票 2" class="ticket-thumb">
+                        <div class="lightbox">
+                            <span class="close-lightbox" for="lightbox-zoom-2">&times;</span>
+                            <img src="image_11.png" alt="機票 2 放大" class="lightbox-content">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </details>
+
+        <details class="agenda">
             <summary>🌿 DAY 1 (4/29) 阿蘇火山與溫泉</summary>
             <div class="content">
                 <div class="timeline">
@@ -322,7 +456,7 @@
             </div>
         </details>
 
-        <details>
+        <details class="agenda">
             <summary>🍵 DAY 2 (4/30) 神社巡禮與八女茶</summary>
             <div class="content">
                 <div class="timeline">
@@ -360,7 +494,7 @@
             </div>
         </details>
 
-        <details>
+        <details class="agenda">
             <summary>🌸 DAY 3 (5/1) 紫藤花與福岡文創</summary>
             <div class="content">
                 <div class="timeline">
@@ -398,7 +532,7 @@
             </div>
         </details>
 
-        <details open>
+        <details class="agenda" open>
             <summary>🏯 DAY 4 (5/2) 熊本城與頂級馬肉</summary>
             <div class="content">
                 <div class="timeline">
@@ -436,7 +570,7 @@
             </div>
         </details>
 
-        <details>
+        <details class="agenda">
             <summary>🛫 DAY 5 (5/3) 順利返程</summary>
             <div class="content">
                 <div class="timeline">
