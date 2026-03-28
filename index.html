@@ -29,33 +29,35 @@
             line-height: 1.5;
         }
 
-        /* 頂部質感橫幅 */
+        /* 頂部熊本城背景 (加入暗色遮罩確保文字清晰) */
         .header {
-            background: linear-gradient(135deg, #FF6B6B 0%, #D32F2F 100%); /* 熊本櫻花與紅 */
+            /* 這裡設定了背景圖片，請確保 GitHub 上的檔名是 bg_kumamoto.jpg */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('bg_kumamoto.jpg');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 50px 20px 40px;
+            padding: 60px 20px 40px;
             text-align: center;
             border-radius: 0 0 32px 32px;
-            box-shadow: 0 8px 16px rgba(211, 47, 47, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             margin-bottom: 30px;
             position: relative;
         }
 
         .header-title-img {
-            max-width: 85%;       /* 確保在手機上不會太大超出螢幕 */
+            max-width: 85%;       
             height: auto;
-            max-height: 100px;    /* 限制最大高度 */
-            margin: 0 auto 12px;  /* 讓圖片置中，並與下方的日期保持一點距離 */
-            display: block;       /* 確保置中設定生效 */
-            
-            /* 【魔法濾鏡】現在只會作用在黑色的字體上，把其反轉成白色，並加上一點淡淡的陰影 */
-            filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            max-height: 100px;    
+            margin: 0 auto 12px;  
+            display: block;       
+            filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.4));
         }
 
         .header p {
             margin: 10px 0 0 0;
             font-size: 0.9rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .container {
@@ -95,7 +97,7 @@
             margin-bottom: 12px;
             background: var(--bg-color);
             border-radius: 12px;
-            padding: 10px 166px;
+            padding: 10px 16px; /* 修正了先前的 padding 異常 */
             border: 1px solid var(--timeline-color);
         }
 
@@ -104,6 +106,7 @@
             color: var(--text-muted);
             margin-right: 12px;
             font-size: 1.1rem;
+            white-space: nowrap;
         }
 
         .input-group input {
@@ -116,10 +119,28 @@
             font-weight: bold;
         }
 
+        /* 切換幣值按鈕 */
+        .swap-btn {
+            background-color: #FFE3E3;
+            color: var(--primary-color);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        
+        .swap-btn:active {
+            transform: scale(0.95);
+        }
+
         .result-group {
             display: flex;
             align-items: center;
-            padding: 12px 166px;
+            padding: 12px 16px;
             background: #FFF3E0;
             border-radius: 12px;
             color: #E65100;
@@ -282,13 +303,14 @@
             </div>
             
             <div class="input-group">
-                <span class="currency-symbol">¥</span>
-                <input type="number" id="jpyInput" placeholder="輸入日幣金額" oninput="calculate()">
+                <span class="currency-symbol" id="inputSymbol">¥</span>
+                <input type="number" id="currencyInput" placeholder="輸入金額" oninput="calculate()">
+                <button class="swap-btn" onclick="toggleCurrency()">⇅ 切換</button>
             </div>
             
             <div class="result-group">
-                <span class="currency-symbol">約合 NT$</span>
-                <span class="result-amount" id="twdOutput">0</span>
+                <span class="currency-symbol" id="outputSymbol">約合 NT$</span>
+                <span class="result-amount" id="currencyOutput">0</span>
             </div>
         </div>
 
@@ -406,7 +428,7 @@
             </div>
         </details>
 
-        <details open>
+        <details>
             <summary>🏯 DAY 4 (5/2) 頂級馬肉與熊本城</summary>
             <div class="content">
                 <div class="timeline">
@@ -471,11 +493,11 @@
 
     <script>
         let currentRate = 0.215; // 預設備用匯率 (防止 API 失敗)
+        let isJpyToTwd = true; // 預設狀態：日幣轉台幣
 
         // 頁面載入時，抓取最新匯率
         async function fetchExchangeRate() {
             try {
-                // 使用免費的 exchangerate-api
                 const response = await fetch('https://api.exchangerate-api.com/v4/latest/JPY');
                 const data = await response.json();
                 
@@ -491,21 +513,39 @@
             }
         }
 
+        // 切換幣值功能
+        function toggleCurrency() {
+            isJpyToTwd = !isJpyToTwd;
+            
+            // 更新 UI 符號
+            document.getElementById('inputSymbol').innerText = isJpyToTwd ? '¥' : 'NT$';
+            document.getElementById('outputSymbol').innerText = isJpyToTwd ? '約合 NT$' : '約合 ¥';
+            
+            // 重新計算當下輸入的值
+            calculate();
+        }
+
         // 計算匯率
         function calculate() {
-            const jpyAmount = document.getElementById('jpyInput').value;
-            const twdOutput = document.getElementById('twdOutput');
+            const amount = document.getElementById('currencyInput').value;
+            const output = document.getElementById('currencyOutput');
             
-            if (jpyAmount && jpyAmount > 0) {
-                const calculated = Math.round(jpyAmount * currentRate);
-                // 加上千位數逗號，方便閱讀
-                twdOutput.innerText = calculated.toLocaleString();
+            if (amount && amount > 0) {
+                let calculated = 0;
+                if (isJpyToTwd) {
+                    // 日轉台：金額乘上匯率
+                    calculated = Math.round(amount * currentRate);
+                } else {
+                    // 台轉日：金額除以匯率
+                    calculated = Math.round(amount / currentRate);
+                }
+                output.innerText = calculated.toLocaleString();
             } else {
-                twdOutput.innerText = '0';
+                output.innerText = '0';
             }
         }
 
-        // 執行抓取
+        // 啟動抓取
         fetchExchangeRate();
     </script>
 </body>
