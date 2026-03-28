@@ -29,9 +29,8 @@
             line-height: 1.5;
         }
 
-        /* 頂部熊本城背景 (加入暗色遮罩確保文字清晰) */
+        /* 頂部熊本城背景 */
         .header {
-            /* 這裡設定了背景圖片，請確保 GitHub 上的檔名是 bg_kumamoto.jpg */
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('bg_kumamoto.jpg');
             background-size: cover;
             background-position: center;
@@ -71,7 +70,7 @@
             background: var(--card-bg);
             border-radius: 20px;
             padding: 24px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border-top: 4px solid var(--primary-color);
         }
@@ -97,7 +96,7 @@
             margin-bottom: 12px;
             background: var(--bg-color);
             border-radius: 12px;
-            padding: 10px 16px; /* 修正了先前的 padding 異常 */
+            padding: 10px 16px;
             border: 1px solid var(--timeline-color);
         }
 
@@ -152,7 +151,7 @@
             margin-left: auto;
         }
 
-        /* 手風琴卡片設計 */
+        /* 手風琴卡片設計 (適用於行程與機票) */
         details {
             background: var(--card-bg);
             border-radius: 20px;
@@ -172,7 +171,7 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            list-style: none; /* 隱藏預設箭頭 */
+            list-style: none;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -183,7 +182,6 @@
             display: none;
         }
 
-        /* 自訂箭頭動畫 */
         summary::after {
             content: '';
             width: 10px;
@@ -200,6 +198,66 @@
 
         .content {
             padding: 0 24px 24px 24px;
+        }
+
+        /* 機票與圖片放大樣式 */
+        .ticket-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .ticket-thumb {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ticket-thumb:active {
+            transform: scale(0.98);
+        }
+
+        .lightbox-zoom { display: none; }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox-zoom:checked + label .lightbox {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .close-hint {
+            position: absolute;
+            bottom: 40px;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
 
         /* 時間軸設計 */
@@ -228,7 +286,6 @@
             padding-bottom: 0;
         }
 
-        /* 時間軸上的小圓點 */
         .event::before {
             content: '';
             position: absolute;
@@ -242,7 +299,6 @@
             z-index: 1;
         }
 
-        /* 特殊標記（預約餐廳） */
         .event.highlight::before {
             background-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
@@ -313,6 +369,39 @@
                 <span class="result-amount" id="currencyOutput">0</span>
             </div>
         </div>
+
+        <details>
+            <summary>✈️ 航班與機票資訊</summary>
+            <div class="content">
+                <p class="note" style="margin-top: 0; margin-bottom: 16px;">💡 點擊圖片即可全螢幕放大查看</p>
+                
+                <div class="ticket-grid">
+                    <div>
+                        <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛫 去程：TPE → KMJ</div>
+                        <input type="checkbox" id="zoom-outbound" class="lightbox-zoom">
+                        <label for="zoom-outbound">
+                            <img src="flight_out.png" alt="去程航班" class="ticket-thumb">
+                            <div class="lightbox">
+                                <img src="flight_out.png" class="lightbox-img">
+                                <div class="close-hint">點擊任意處關閉</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛬 回程：KMJ → TPE</div>
+                        <input type="checkbox" id="zoom-return" class="lightbox-zoom">
+                        <label for="zoom-return">
+                            <img src="flight_return.png" alt="回程航班" class="ticket-thumb">
+                            <div class="lightbox">
+                                <img src="flight_return.png" class="lightbox-img">
+                                <div class="close-hint">點擊任意處關閉</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </details>
 
         <details>
             <summary>🌿 DAY 1 (4/29) 阿蘇火山與溫泉</summary>
@@ -492,8 +581,8 @@
     </div>
 
     <script>
-        let currentRate = 0.215; // 預設備用匯率 (防止 API 失敗)
-        let isJpyToTwd = true; // 預設狀態：日幣轉台幣
+        let currentRate = 0.215; // 預設備用匯率
+        let isJpyToTwd = true;   // 預設：日幣轉台幣
 
         // 頁面載入時，抓取最新匯率
         async function fetchExchangeRate() {
@@ -533,10 +622,8 @@
             if (amount && amount > 0) {
                 let calculated = 0;
                 if (isJpyToTwd) {
-                    // 日轉台：金額乘上匯率
                     calculated = Math.round(amount * currentRate);
                 } else {
-                    // 台轉日：金額除以匯率
                     calculated = Math.round(amount / currentRate);
                 }
                 output.innerText = calculated.toLocaleString();
@@ -545,7 +632,6 @@
             }
         }
 
-        // 啟動抓取
         fetchExchangeRate();
     </script>
 </body>
