@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九州 5 天 4 夜自駕遊</title>
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --text-light: #718096;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        details {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 15px;
+            cursor: pointer;
+            outline: none;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            color: var(--text-light);
+            transition: transform 0.3s;
+        }
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+        .content {
+            padding: 0 15px 15px 15px;
+            border-top: 1px solid var(--border);
+        }
+        .event {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .event:last-child {
+            border-bottom: none;
+        }
+        .time {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .title {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: block;
+            margin-top: 4px;
+        }
+        .highlight {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚗 九州 5 天 4 夜自駕遊</h1>
+
+    <details>
+        <summary>DAY 1 (4/29) 阿蘇火山與溫泉</summary>
+        <div class="content">
+            <div class="event"><span class="time">10:45</span><span class="title">抵達熊本機場 (KMJ)</span><span class="note">辦理租車手續，12:00 出發</span></div>
+            <div class="event"><span class="time">13:00 - 15:00</span><span class="title">阿蘇赤牛丼飯 Yokayoka亭</span><span class="note">中途外帶：Minata 炸雞</span></div>
+            <div class="event"><span class="time">15:20 - 16:00</span><span class="title">ASO Milk Factory</span><span class="note">吃冰淇淋與牛奶</span></div>
+            <div class="event"><span class="time">16:30 - 18:30</span><span class="title">阿蘇景點逛逛</span><span class="note">神社商店街、郵局、超市。18:00 提燈祭</span></div>
+            <div class="event"><span class="time">18:40 - 20:00</span><span class="title">拉麵 らーめんぎゃん</span><span class="note">排隊名店，20:00 關門</span></div>
+            <div class="event"><span class="time">20:30</span><span class="title">旅館 Check in 休息</span><span class="note">溫泉時間</span></div>
+        </div>
+    </details>
+
+    <details>
+        <summary>DAY 2 (4/30) 神社巡禮與八女茶</summary>
+        <div class="content">
+            <div class="event"><span class="time">10:10 - 12:00</span><span class="title">南阿蘇景點</span><span class="note">白蛇神社、白川水源、上色見熊野座神社</span></div>
+            <div class="event"><span class="time">12:30 - 14:00</span><span class="title">HAKUSUI no KURA 燒肉</span><span class="note">白水乃藏 (已預約)</span></div>
+            <div class="event"><span class="time">15:40 - 16:00</span><span class="title">八女中央大茶園展望所</span><span class="note">喝抹茶冰、拿鐵</span></div>
+            <div class="event"><span class="time">16:10 - 17:50</span><span class="title">八女白壁老街</span><span class="note">橫町町家交流館 / 許斐本家</span></div>
+            <div class="event"><span class="time">18:00 - 19:30</span><span class="title">TORIGEN 雞料理</span><span class="note">步行 5 分鐘即可抵達</span></div>
+            <div class="event"><span class="time">20:00</span><span class="title">久留米飯店 Check in</span><span class="note">結束駕駛，早點休息</span></div>
+        </div>
+    </details>
+
+    <details>
+        <summary>DAY 3 (5/1) 紫藤花與福岡文創</summary>
+        <div class="content">
+            <div class="event"><span class="time">09:30</span><span class="title">出發</span><span class="note">路上超商買早餐</span></div>
+            <div class="event"><span class="time">11:00 - 12:00</span><span class="title">河內藤園</span><span class="note">12:00前要入園，掃QR code+補票</span></div>
+            <div class="event"><span class="time">13:00 - 14:00</span><span class="title">Eel eight 鰻魚飯</span><span class="note">(已預約)</span></div>
+            <div class="event"><span class="time">14:00 - 14:30</span><span class="title">櫛田神社</span><span class="note">吃飽散步過去</span></div>
+            <div class="event"><span class="time">15:30 - 18:30</span><span class="title">市區購物與逛街</span><span class="note">扭蛋博物館(運河城) → POP MART(天神)</span></div>
+            <div class="event"><span class="time">19:00 - 21:00</span><span class="title">燒肉上</span><span class="note">(已預約)</span></div>
+            <div class="event"><span class="time">22:00</span><span class="title">回久留米飯店</span><span class="note">清點戰利品：貓表飛鳴、Niko and...</span></div>
+        </div>
+    </details>
+
+    <details open>
+        <summary>DAY 4 (5/2) 熊本城與頂級馬肉</summary>
+        <div class="content">
+            <div class="event"><span class="time">10:00 - 11:45</span><span class="title">退房 & 開車南下</span><span class="note">前往熊本市區</span></div>
+            <div class="event"><span class="time">12:00 - 13:30</span><span class="title highlight">馬刺與燒鳥 Gourmand 三年坂</span><span class="note highlight">★已訂位 12:00★ 頂級馬肉與赤牛</span></div>
+            <div class="event"><span class="time">13:30 - 14:30</span><span class="title">熊本城 (海膽餅) & 城彩苑</span><span class="note">吃飽散步逛街</span></div>
+            <div class="event"><span class="time">14:30 - 15:00</span><span class="title">別所琴平神社</span><span class="note">尋找貓貓與絕美御朱印</span></div>
+            <div class="event"><span class="time">15:00 - 17:00</span><span class="title">飯店 Check in 休息</span><span class="note">放行李，稍微喘口氣</span></div>
+            <div class="event"><span class="time">17:30 - 19:00</span><span class="title highlight">ONE STATION 酒店 聚餐</span><span class="note highlight">★已訂位 17:30★</span></div>
+        </div>
+    </details>
+
+    <details>
+        <summary>DAY 5 (5/3) 順利返程</summary>
+        <div class="content">
+            <div class="event"><span class="time">08:00</span><span class="title">Check out 退房</span><span class="note">確認行李與租車文件</span></div>
+            <div class="event"><span class="time">09:20</span><span class="title">辦理還車手續</span><span class="note">機場周邊租車營業所</span></div>
+            <div class="event"><span class="time">11:55</span><span class="title">班機起飛</span><span class="note">機場買早餐，平安回家！</span></div>
+        </div>
+    </details>
+
+</body>
+</html>
