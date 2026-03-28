@@ -52,6 +52,18 @@
             font-size: 0.9rem;
             opacity: 0.9;
         }
+        
+        /* --- 新增的標題圖片樣式 --- */
+        .header-title-img {
+            max-width: 85%;       /* 確保在手機上不會太大超出螢幕 */
+            height: auto;
+            max-height: 100px;    /* 限制最大高度 */
+            margin: 0 auto 12px;  /* 讓圖片置中，並與下方的日期保持一點距離 */
+            display: block;       /* 確保置中設定生效 */
+            
+            /* 【魔法濾鏡】把黑色的字體反轉成白色，並加上一點立體陰影 */
+            filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
 
         .container {
             padding: 0 16px;
@@ -264,7 +276,7 @@
 <body>
 
     <div class="header">
-        <h1>🚗 九州自駕行 🚗</h1>
+        <img src="title.png" alt="熊本旅遊" class="header-title-img">
         <p>2026.04.29 - 05.03 | 熊本 • 阿蘇 • 八女 • 福岡</p>
     </div>
 
