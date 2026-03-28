@@ -31,7 +31,7 @@
 
         /* 頂部質感橫幅 */
         .header {
-            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* 阿蘇自然綠 */
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
             color: white;
             padding: 40px 20px 30px;
             text-align: center;
@@ -59,326 +59,41 @@
             margin: 0 auto;
         }
 
-        /* 手風琴卡片設計 */
-        details {
+        /* 匯率計算器專屬樣式 */
+        .converter-card {
             background: var(--card-bg);
             border-radius: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        details[open] {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            padding: 20px;
             margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--primary-color);
         }
 
-        summary {
-            padding: 18px 20px;
-            font-weight: 700;
+        .converter-title {
             font-size: 1.1rem;
-            cursor: pointer;
-            list-style: none; /* 隱藏預設箭頭 */
+            font-weight: 700;
+            margin-bottom: 15px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            color: var(--text-main);
+            align-items: center;
         }
 
-        summary::-webkit-details-marker {
-            display: none;
+        .rate-info {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: normal;
         }
 
-        /* 自訂箭頭動畫 */
-        summary::after {
-            content: '';
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid var(--text-muted);
-            border-bottom: 2px solid var(--text-muted);
-            transform: translateY(-2px) rotate(45deg);
-            transition: transform 0.3s ease;
-        }
-
-        details[open] summary::after {
-            transform: translateY(2px) rotate(-135deg);
-        }
-
-        .content {
-            padding: 0 20px 20px 20px;
-        }
-
-        /* 時間軸設計 */
-        .timeline {
-            position: relative;
-            padding-left: 24px;
-            margin-top: 10px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 6px;
-            bottom: 0;
-            width: 2px;
-            background-color: var(--timeline-color);
-        }
-
-        .event {
-            position: relative;
-            padding-bottom: 24px;
-        }
-
-        .event:last-child {
-            padding-bottom: 0;
-        }
-
-        /* 時間軸上的小圓點 */
-        .event::before {
-            content: '';
-            position: absolute;
-            left: -24px;
-            top: 6px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: white;
-            border: 2px solid var(--primary-color);
-            z-index: 1;
-        }
-
-        /* 特殊標記（預約餐廳） */
-        .event.highlight::before {
-            background-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
-        }
-
-        .time {
-            font-size: 0.85rem;
-            color: var(--primary-color);
-            font-weight: 700;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-main);
+        .input-group {
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        .note {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: 4px;
-            background-color: #F8FAFC;
-            padding: 8px 12px;
+            margin-bottom: 12px;
+            background: var(--bg-color);
             border-radius: 8px;
-            border-left: 3px solid #CBD5E1;
+            padding: 8px 12px;
+            border: 1px solid var(--timeline-color);
         }
 
-        .highlight-tag {
-            background-color: #FFF3E0;
-            color: #E65100;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>🚗 九州自駕 5天4夜</h1>
-        <p>2026.04.29 - 05.03 | 熊本 • 阿蘇 • 八女 • 福岡</p>
-    </div>
-
-    <div class="container">
-
-        <details>
-            <summary>🌿 DAY 1 (4/29) 阿蘇火山與溫泉</summary>
-            <div class="content">
-                <div class="timeline">
-                    <div class="event">
-                        <span class="time">10:45</span>
-                        <span class="title">✈️ 抵達熊本機場 (KMJ)</span>
-                        <span class="note">辦理租車手續，預計 12:00 出發。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">13:00 - 15:00</span>
-                        <span class="title">🥩 阿蘇赤牛丼飯 Yokayoka亭</span>
-                        <span class="note">名店需排隊。中途可外帶 Minata 炸雞。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">15:20 - 16:00</span>
-                        <span class="title">🍦 ASO Milk Factory</span>
-                        <span class="note">享用頂級牛奶與冰淇淋 (18:00 關門)。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">16:30 - 18:30</span>
-                        <span class="title">⛩️ 阿蘇景點逛逛</span>
-                        <span class="note">阿蘇神社商店街、郵局、超市。晚上有提燈祭。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">18:40 - 20:00</span>
-                        <span class="title">🍜 拉麵 らーめんぎゃん</span>
-                        <span class="note">人氣排隊拉麵，20:00 關門。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">20:30</span>
-                        <span class="title">♨️ 旅館 Check in 休息</span>
-                        <span class="note">泡溫泉，好好放鬆儲備體力。</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>🍵 DAY 2 (4/30) 神社巡禮與八女茶</summary>
-            <div class="content">
-                <div class="timeline">
-                    <div class="event">
-                        <span class="time">10:10 - 12:00</span>
-                        <span class="title">⛩️ 南阿蘇秘境巡禮</span>
-                        <span class="note">白蛇神社、白川水源、上色見熊野座神社、高森觀光機構(御朱印應募)。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">12:30 - 14:00</span>
-                        <span class="title">🔥 HAKUSUI no KURA 燒肉 <span class="highlight-tag">已預約</span></span>
-                        <span class="note">白水乃藏享用美味燒肉。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">15:40 - 16:00</span>
-                        <span class="title">🏞️ 八女中央大茶園展望所</span>
-                        <span class="note">絕美茶園景觀，喝抹茶冰、拿鐵。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">16:10 - 17:50</span>
-                        <span class="title">🏘️ 八女白壁老街</span>
-                        <span class="note">橫町町家交流館 (19:00關) / 許斐本家 (18:00關)。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">18:00 - 19:30</span>
-                        <span class="title">🐔 TORIGEN 雞料理 <span class="highlight-tag">已預約</span></span>
-                        <span class="note">老街步行 5 分鐘即可抵達。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">20:00</span>
-                        <span class="title">🛏️ 久留米飯店 Check in</span>
-                        <span class="note">結束長途駕駛，早點休息。</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>🌸 DAY 3 (5/1) 紫藤花與福岡文創</summary>
-            <div class="content">
-                <div class="timeline">
-                    <div class="event">
-                        <span class="time">11:00 - 12:00</span>
-                        <span class="title">🌺 河內藤園</span>
-                        <span class="note">12:00前務必入園，掃QR code+補票。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">13:00 - 14:00</span>
-                        <span class="title">🍱 Eel eight 鰻魚飯 <span class="highlight-tag">已預約</span></span>
-                        <span class="note">享用道地福岡鰻魚飯。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">14:00 - 14:30</span>
-                        <span class="title">⛩️ 櫛田神社</span>
-                        <span class="note">吃飽散步過去參拜。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">15:30 - 18:30</span>
-                        <span class="title">🛍️ 市區購物探險</span>
-                        <span class="note">博多運河城(扭蛋博物館) → 天神PARCO/地下街(POP MART)。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">19:00 - 21:00</span>
-                        <span class="title">🥩 燒肉上 <span class="highlight-tag">已預約</span></span>
-                        <span class="note">晚餐大口吃肉。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">22:00</span>
-                        <span class="title">🛏️ 回久留米飯店</span>
-                        <span class="note">🛒 購物提醒：貓表飛鳴、canmake、Niko and、平板夾。</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
-        <details open>
-            <summary>🏯 DAY 4 (5/2) 熊本城與頂級馬肉</summary>
-            <div class="content">
-                <div class="timeline">
-                    <div class="event">
-                        <span class="time">10:00 - 11:45</span>
-                        <span class="title">🚗 退房 & 開車南下</span>
-                        <span class="note">離開久留米，前往熊本市區。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">12:00 - 13:30</span>
-                        <span class="title">🐴 馬刺與燒鳥 Gourmand 三年坂 <span class="highlight-tag">★已訂位 12:00★</span></span>
-                        <span class="note">品嚐頂級生馬肉與赤牛料理，絕佳體驗。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">13:30 - 14:30</span>
-                        <span class="title">🏯 熊本城 & 城彩苑</span>
-                        <span class="note">吃海膽餅，逛街買伴手禮。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">14:30 - 15:00</span>
-                        <span class="title">⛩️ 別所琴平神社</span>
-                        <span class="note">尋找貓貓，收集絕美御朱印 🐱。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">15:00 - 17:00</span>
-                        <span class="title">🛏️ 飯店 Check in 休息</span>
-                        <span class="note">放行李，稍微喘口氣。</span>
-                    </div>
-                    <div class="event highlight">
-                        <span class="time">17:30 - 19:00</span>
-                        <span class="title">🍻 ONE STATION 酒店聚餐 <span class="highlight-tag">★已訂位 17:30★</span></span>
-                        <span class="note">享用豐盛晚餐。</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>🛫 DAY 5 (5/3) 順利返程</summary>
-            <div class="content">
-                <div class="timeline">
-                    <div class="event">
-                        <span class="time">08:00</span>
-                        <span class="title">🧳 Check out 退房</span>
-                        <span class="note">確認行李與租車文件。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">09:20</span>
-                        <span class="title">🚘 辦理還車手續</span>
-                        <span class="note">於機場周邊租車營業所完成還車。</span>
-                    </div>
-                    <div class="event">
-                        <span class="time">11:55</span>
-                        <span class="title">✈️ 班機起飛</span>
-                        <span class="note">機場買早餐，帶著滿滿回憶平安回家！</span>
-                    </div>
-                </div>
-            </div>
-        </details>
-
-    </div>
-
-</body>
-</html>
+        .currency-symbol {
+            font-weight: bold;
+            color: var(--text-muted
