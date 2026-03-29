@@ -46,15 +46,16 @@
 
         .home-header {
             text-align: center;
-            margin-bottom: auto; /* 將選單推到下方 */
+            margin-bottom: auto; 
         }
 
-        /* 放大 130% 的標題設定 */
+        /* 修復標題變扁的問題：加入 object-fit 鎖定比例 */
         .header-title-img {
-            width: 100%;       
-            max-width: 360px;     /* 放寬最大寬度限制 */
+            width: 90%;       
+            max-width: 360px;     
             height: auto;
-            max-height: 160px;    /* 高度從 120px 放大至 160px (約130%) */
+            max-height: 160px;    
+            object-fit: contain;  /* ★ 鎖定等比例縮放，絕對不會變形 */
             margin: 10px auto 24px;  
             display: block;       
             filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.4));
@@ -62,7 +63,7 @@
 
         .home-header p {
             margin: 0;
-            font-size: 1.05rem; /* 字體微調大一點點 */
+            font-size: 1.05rem; 
             opacity: 0.95;
             font-weight: 500;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -115,8 +116,9 @@
 
         /* ==================== 內頁視圖 ==================== */
         #content-view {
-            display: none; /* 預設隱藏 */
-            padding-top: calc(var(--nav-height) + 20px); 
+            display: none; 
+            /* 修復頁籤擋住內容的問題：加大頂部預留空間 */
+            padding-top: 130px; /* ★ 完美避開 導覽列(56px) + 頁籤(約50px) 的高度 */
             padding-bottom: 40px;
         }
 
@@ -194,7 +196,7 @@
         }
 
         .tab-content {
-            display: none; /* 預設隱藏所有內容 */
+            display: none; 
             padding: 0 16px;
             max-width: 600px;
             margin: 0 auto;
@@ -202,7 +204,7 @@
         }
 
         .tab-content.active {
-            display: block; /* 顯示選中的內容 */
+            display: block; 
         }
 
         @keyframes fadeIn {
