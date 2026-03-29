@@ -9,24 +9,16 @@
         :root {
             --primary-color: #D32F2F; 
             --bg-color: #F8FAFC;
-            --card-bg: #FFFFFF;
+            /* 將卡片背景改為半透明，讓底下的背景圖可以透出來 */
+            --card-bg: rgba(255, 255, 255, 0.85); 
             --text-main: #1F2937;
-            --text-muted: #6B7280;
-            --timeline-color: #E2E8F0;
+            --text-muted: #4B5563; /* 加深一點確保在半透明背景上清晰 */
+            --timeline-color: #CBD5E1;
             --nav-height: 56px;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Noto Sans TC', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0; padding: 0; line-height: 1.5; overflow-x: hidden;
-        }
+        * { box-sizing: border-box; font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 0; line-height: 1.5; overflow-x: hidden; }
 
         /* ==================== 首頁視圖 ==================== */
         #home-view {
@@ -37,30 +29,29 @@
         }
 
         .home-header { text-align: center; margin-bottom: auto; }
-
         .header-title-img {
             width: 90%; max-width: 360px; height: auto; max-height: 160px; object-fit: contain;  
             margin: 10px auto 24px; display: block;       
             filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.4));
         }
-
         .home-header p { margin: 0; font-size: 1.05rem; opacity: 0.95; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; line-height: 1.6; }
 
         .home-menu { margin-top: 40px; display: grid; gap: 16px; }
-
         .menu-btn {
             background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 20px;
             color: white; font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; justify-content: flex-start; cursor: pointer; box-shadow: 0 8px 16px rgba(0,0,0,0.2); transition: all 0.2s;
         }
         .menu-btn:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.25); }
+        .menu-icon { font-size: 1.8rem; margin-right: 16px; background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 
-        .menu-icon {
-            font-size: 1.8rem; margin-right: 16px; background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        /* ==================== 內頁視圖 (加入自訂背景圖) ==================== */
+        #content-view { 
+            display: none; padding-top: 130px; padding-bottom: 40px; min-height: 100vh;
+            /* ★ 這裡套用了您專屬的資訊頁背景圖 ★ */
+            background-image: url('bg_content.jpg'); 
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
-
-        /* ==================== 內頁視圖 ==================== */
-        #content-view { display: none; padding-top: 130px; padding-bottom: 40px; }
 
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%;
@@ -69,30 +60,29 @@
         }
 
         .nav-header { height: var(--nav-height); display: flex; align-items: center; justify-content: center; position: relative; }
-
-        .back-btn {
-            position: absolute; left: 16px; background: none; border: none; color: var(--primary-color); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; padding: 8px 0;
-        }
+        .back-btn { position: absolute; left: 16px; background: none; border: none; color: var(--primary-color); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; padding: 8px 0; }
         .back-btn::before { content: "‹"; font-size: 1.8rem; margin-right: 4px; line-height: 1; transform: translateY(-2px); }
         .nav-title { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
 
-        /* 頁籤列 */
-        .tabs { display: flex; border-top: 1px solid #F1F5F9; }
-        .tab-btn {
-            flex: 1; background: none; border: none; padding: 10px 0; font-size: 0.9rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s;
-        }
+        .tabs { display: flex; border-top: 1px solid #E5E7EB; }
+        .tab-btn { flex: 1; background: none; border: none; padding: 10px 0; font-size: 0.9rem; font-weight: 700; color: #6B7280; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; }
         .tab-btn.active { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); }
 
         .tab-content { display: none; padding: 0 16px; max-width: 600px; margin: 0 auto; animation: fadeIn 0.3s ease; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ==================== 模組共用樣式 ==================== */
-        .glass-card { background: var(--card-bg); border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        /* ==================== 模組共用毛玻璃樣式 ==================== */
+        .glass-card { 
+            background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+        }
 
-        /* 行程手風琴與點擊效果 */
-        details { background: var(--card-bg); border-radius: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); overflow: hidden; transition: all 0.3s ease; }
-        details[open] { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); margin-bottom: 24px; }
+        details { 
+            background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; transition: all 0.3s ease; 
+        }
+        details[open] { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); margin-bottom: 24px; }
         summary { padding: 20px 24px; font-weight: 700; font-size: 1.1rem; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; color: var(--text-main); }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: ''; width: 10px; height: 10px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: translateY(-2px) rotate(45deg); transition: transform 0.3s ease; }
@@ -102,19 +92,16 @@
         .timeline { position: relative; padding-left: 24px; margin-top: 10px; }
         .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 0; width: 2px; background-color: var(--timeline-color); }
         
-        /* 讓行程具備按鈕的點擊回饋感 */
         .event { position: relative; padding-bottom: 24px; cursor: pointer; transition: 0.2s; border-radius: 12px; margin-left: -12px; padding-left: 12px; padding-right: 8px;}
-        .event:hover, .event:active { background-color: #F1F5F9; }
+        .event:hover, .event:active { background-color: rgba(255,255,255,0.5); }
         .event:last-child { padding-bottom: 8px; }
         .event::before { content: ''; position: absolute; left: -12px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: white; border: 2px solid var(--primary-color); z-index: 1; }
         .event.highlight::before { background-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2); }
-        
-        /* 提示可以點擊的小箭頭 */
-        .event::after { content: '›'; position: absolute; right: 10px; top: 10px; font-size: 1.5rem; color: #CBD5E1; }
+        .event::after { content: '›'; position: absolute; right: 10px; top: 10px; font-size: 1.5rem; color: #9CA3AF; }
 
         .time { font-size: 0.85rem; color: var(--primary-color); font-weight: 700; display: block; margin-bottom: 4px; padding-top: 4px;}
         .title { font-size: 1.05rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-        .note { font-size: 0.9rem; color: var(--text-muted); display: block; margin-top: 4px; background-color: transparent; padding: 0; border: none; margin-bottom: 8px;}
+        .note { font-size: 0.9rem; color: var(--text-muted); display: block; margin-top: 4px; padding: 0; margin-bottom: 8px; font-weight: 500;}
         .highlight-tag { background-color: #FFF3E0; color: #E65100; font-size: 0.75rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
 
         /* ==================== 彈出視窗 (Modal) ==================== */
@@ -129,41 +116,27 @@
             animation: modalPop 0.3s ease; position: relative;
         }
         @keyframes modalPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .modal-close {
-            position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #9CA3AF;
-            background: none; border: none; cursor: pointer; line-height: 1;
-        }
+        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #9CA3AF; background: none; border: none; cursor: pointer; line-height: 1; }
         .modal-header { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; padding-right: 30px;}
         
-        /* Modal 內部的特殊按鈕與圖片 */
-        .map-link-btn {
-            display: block; width: 100%; background: #E8F5E9; color: #2E7D32; text-align: center;
-            padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-bottom: 16px;
-        }
+        .map-link-btn { display: block; width: 100%; background: #E8F5E9; color: #2E7D32; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-bottom: 16px; border: 1px solid #C8E6C9;}
         .booking-img { width: 100%; border-radius: 12px; border: 1px solid #E5E7EB; margin-bottom: 16px; }
 
-        /* ==================== 地圖與快捷查詢 ==================== */
-        .quick-search-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .search-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: white; border: 1px solid #E2E8F0; padding: 12px; border-radius: 12px;
-            color: var(--text-main); font-weight: 700; text-decoration: none; font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: 0.2s;
-        }
-        .search-btn:active { background: #F1F5F9; transform: scale(0.98); }
-        .map-container { width: 100%; height: 400px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-
-        /* 其他原有樣式 (匯率/機票) 省略保持不變，直接套用... */
+        /* ==================== 其他工具樣式 ==================== */
         .converter-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .input-group { display: flex; align-items: center; margin-bottom: 12px; background: var(--bg-color); border-radius: 12px; padding: 10px 16px; border: 1px solid var(--timeline-color); }
+        .input-group { display: flex; align-items: center; margin-bottom: 12px; background: rgba(255,255,255,0.6); border-radius: 12px; padding: 10px 16px; border: 1px solid rgba(0,0,0,0.1); }
         .currency-symbol { font-weight: bold; color: var(--text-muted); margin-right: 12px; font-size: 1.1rem; }
         .input-group input { border: none; background: transparent; font-size: 1.4rem; width: 100%; outline: none; color: var(--text-main); font-weight: bold; }
         .swap-btn { background-color: #FFE3E3; color: var(--primary-color); border: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; cursor: pointer; }
-        .result-group { display: flex; align-items: center; padding: 12px 16px; background: #FFF3E0; border-radius: 12px; color: #E65100; }
+        .result-group { display: flex; align-items: center; padding: 12px 16px; background: rgba(255, 243, 224, 0.9); border-radius: 12px; color: #E65100; border: 1px solid rgba(230, 81, 0, 0.2);}
         .result-amount { font-size: 1.8rem; font-weight: 700; margin-left: auto; }
+        
+        .quick-search-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .search-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1); padding: 12px; border-radius: 12px; color: var(--text-main); font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+        .map-container { width: 100%; height: 400px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        
         .ticket-grid { display: grid; gap: 16px; }
-        .ticket-thumb { width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #E5E7EB; cursor: pointer; transition: 0.2s; }
+        .ticket-thumb { width: 100%; border-radius: 12px; border: 1px solid #E5E7EB; cursor: pointer; }
         .lightbox-zoom { display: none; }
         .lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); padding: 20px; align-items: center; justify-content: center; }
         .lightbox-zoom:checked + label .lightbox { display: flex; }
@@ -216,7 +189,7 @@
         <div id="tab-flights" class="tab-content">
             <div class="glass-card">
                 <h3 style="margin-top:0; font-size:1.1rem; color:var(--text-main);">電子機票檢視</h3>
-                <p style="font-size:0.9rem; color:#6B7280; margin-top:0;">💡 點擊圖片即可全螢幕放大查看</p>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0;">💡 點擊圖片即可全螢幕放大查看</p>
                 <div class="ticket-grid">
                     <div>
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛫 去程：TPE → KMJ</div>
@@ -233,17 +206,29 @@
         </div>
 
         <div id="tab-itinerary" class="tab-content">
-            <p style="font-size:0.9rem; color:#6B7280; text-align:center;">💡 點擊行程項目可查看預約與地圖資訊</p>
+            <p style="font-size:0.9rem; color:white; text-align:center; background: rgba(0,0,0,0.5); padding: 4px; border-radius: 8px; width: fit-content; margin: 0 auto 12px;">💡 點擊每個行程項目可查看詳細內容</p>
             
             <details>
                 <summary>🌿 DAY 1 (4/29) 阿蘇火山與溫泉</summary>
                 <div class="details-content">
                     <div class="timeline">
-                        <div class="event" onclick="openEventModal('抵達熊本機場', '機場取車，準備出發！')">
-                            <span class="time">10:45</span><span class="title">✈️ 抵達熊本機場 (KMJ)</span><span class="note">辦理租車手續，預計 12:00 出發。</span>
+                        <div class="event" onclick="openEventModal('抵達熊本機場', '準備辦理入境與租車手續，行李重量記得確認 (限重3kg隨身)。預計 12:00 出發！')">
+                            <span class="time">10:45</span><span class="title">✈️ 抵達熊本機場 (KMJ)</span><span class="note">辦理租車手續，12:00 出發。</span>
                         </div>
-                        <div class="event" onclick="openEventModal('阿蘇赤牛丼飯 Yokayoka亭', '此項目目前沒有詳細截圖或資訊。')">
-                            <span class="time">13:00 - 15:00</span><span class="title">🥩 阿蘇赤牛丼飯 Yokayoka亭</span><span class="note">名店需排隊。中途可外帶 Minata 炸雞。</span>
+                        <div class="event" onclick="openEventModal('阿蘇赤牛丼飯 Yokayoka亭', '排隊名店，11:00 開始營業。<br><br>💡 中途任務：外帶 Minata 炸雞 (車程約 10 min)。')">
+                            <span class="time">13:00 - 15:00</span><span class="title">🥩 阿蘇赤牛丼飯 Yokayoka亭</span><span class="note">中途外帶 Minata 炸雞。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('ASO Milk Factory', '享用阿蘇頂級牛奶與冰淇淋，商店 18:00 關門，請注意時間。')">
+                            <span class="time">15:20 - 16:00</span><span class="title">🍦 ASO Milk Factory</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('阿蘇景點逛逛', '散步行程：阿蘇神社商店街、郵局、超市。<br><br>⚠️ 注意：神社與郵局 17:00 關門。<br>🏮 18:00 - 22:00 有提燈祭活動！')">
+                            <span class="time">16:30 - 18:30</span><span class="title">⛩️ 阿蘇景點逛逛</span><span class="note">神社/郵局17:00關。晚上有提燈祭。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('拉麵 らーめんぎゃん', '超人氣排隊拉麵店！營業時間只到 20:00，請盡早前往排隊。')">
+                            <span class="time">18:40 - 20:00</span><span class="title">🍜 拉麵 らーめんぎゃん</span><span class="note">20:00 close，排隊店。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('旅館 Check in', '順利完成第一天自駕，好好泡個溫泉休息吧！')">
+                            <span class="time">20:30</span><span class="title">♨️ Check in</span><span class="note">溫泉放鬆時間。</span>
                         </div>
                     </div>
                 </div>
@@ -253,25 +238,113 @@
                 <summary>🍵 DAY 2 (4/30) 神社巡禮與八女茶</summary>
                 <div class="details-content">
                     <div class="timeline">
-                        <div class="event highlight" onclick="openEventModalFromId('HAKUSUI no KURA 燒肉', 'detail-hakusui')">
-                            <span class="time">12:30 - 14:00</span><span class="title">🔥 HAKUSUI no KURA 燒肉 <span class="highlight-tag">已預約</span></span><span class="note">白水乃藏享用美味燒肉。</span>
+                        <div class="event" onclick="openEventModal('退房出發', '準備開始南阿蘇的秘境巡禮！')">
+                            <span class="time">10:00</span><span class="title">🧳 退房</span>
                         </div>
-                        <div class="event highlight" onclick="openEventModal('TORIGEN 雞料理', '已預約 18:00。此項目目前沒有詳細截圖。')">
-                            <span class="time">18:00 - 19:30</span><span class="title">🐔 TORIGEN 雞料理 <span class="highlight-tag">已預約</span></span><span class="note">老街步行 5 分鐘即可抵達。</span>
+                        <div class="event" onclick="openEventModal('白蛇神社', '祈求財運與好運的白蛇神社。車程約 10 分鐘。')">
+                            <span class="time">10:10 - 10:30</span><span class="title">⛩️ 白蛇神社</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('白川水源', '水質清澈見底的秘境，時間若來不及可機動跳過。')">
+                            <span class="time">10:40 - 11:00</span><span class="title">💧 白川水源</span><span class="note">來不及可跳過。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('上色見熊野座神社', '彷彿進入異世界的絕美階梯神道，非常適合拍照打卡。')">
+                            <span class="time">11:10 - 12:00</span><span class="title">⛩️ 上色見熊野座神社</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('高森觀光推進機構', '別忘了在此應募精美的御朱印！')">
+                            <span class="time">12:10 - 12:20</span><span class="title">🏢 高森觀光機構</span><span class="note">御朱印應募。</span>
+                        </div>
+                        <div class="event highlight" onclick="openEventModalFromId('HAKUSUI no KURA 燒肉', 'detail-hakusui')">
+                            <span class="time">12:30 - 14:00</span><span class="title">🔥 HAKUSUI no KURA <span class="highlight-tag">已預約</span></span><span class="note">白水乃藏美味燒肉。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('八女中央大茶園展望所', '車程約 1hr 40min。<br>一望無際的絕美茶園，來杯抹茶冰和拿鐵享受午後時光。')">
+                            <span class="time">15:40 - 16:00</span><span class="title">🏞️ 八女大茶園展望所</span><span class="note">抹茶冰、拿鐵。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('八女白壁老街', '車程約 10 分鐘。<br>橫町町家交流館 (19:00關)<br>許斐本家 (18:00關)。')">
+                            <span class="time">16:10 - 17:50</span><span class="title">🏘️ 八女白壁老街</span>
+                        </div>
+                        <div class="event highlight" onclick="openEventModalFromId('TORIGEN 雞料理', 'detail-torigen')">
+                            <span class="time">18:00 - 19:30</span><span class="title">🐔 TORIGEN 雞料理 <span class="highlight-tag">已預約</span></span><span class="note">從老街走路 5 分鐘。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('久留米飯店 Check in', '辛苦駕駛了，早點休息準備明日的行程。')">
+                            <span class="time">20:00</span><span class="title">🛏️ 久留米 Check in</span>
                         </div>
                     </div>
                 </div>
             </details>
 
-            <details open>
+            <details>
+                <summary>🌸 DAY 3 (5/1) 紫藤花與福岡文創</summary>
+                <div class="details-content">
+                    <div class="timeline">
+                        <div class="event" onclick="openEventModal('出發', '路上記得去超商買個早餐墊墊胃。')">
+                            <span class="time">09:30</span><span class="title">🚗 出發</span><span class="note">超商買早餐。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('河內藤園', '車程約 1.5hr。<br>⚠️ 務必於 12:00 前入園，準備好 QR Code 並補票。')">
+                            <span class="time">11:00 - 12:00</span><span class="title">🌺 河內藤園</span><span class="note">12:00前入園掃QR Code。</span>
+                        </div>
+                        <div class="event highlight" onclick="openEventModalFromId('Eel eight 鰻魚飯', 'detail-eeleight')">
+                            <span class="time">13:00 - 14:00</span><span class="title">🍱 Eel eight 鰻魚飯 <span class="highlight-tag">已預約</span></span><span class="note">車程約 1hr。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('櫛田神社', '吃飽散步過去約 5 分鐘，福岡的總鎮守。')">
+                            <span class="time">14:00 - 14:30</span><span class="title">⛩️ 櫛田神社</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('扭蛋博物館', '回到鰻魚飯開車過去約 5 分鐘。<br>位於博多運河城內，扭蛋迷的天堂！')">
+                            <span class="time">15:30 - 17:00</span><span class="title">🛍️ 扭蛋博物館</span><span class="note">博多運河城。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('POP MART 逛街', '車程約 5 分鐘。<br>主要區域：天神 PARCO、天神地下街。')">
+                            <span class="time">17:00 - 18:30</span><span class="title">🛍️ POP MART</span><span class="note">天神PARCO、地下街。</span>
+                        </div>
+                        <div class="event highlight" onclick="openEventModalFromId('燒肉上', 'detail-yakiniku')">
+                            <span class="time">19:00 - 21:00</span><span class="title">🥩 燒肉上 <span class="highlight-tag">已預約</span></span><span class="note">晚餐大口吃肉。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('回久留米飯店', '🛒 購物清單提醒：<br>1. 藥妝 (貓表飛鳴、canmake)<br>2. 衣服 (Niko and)<br>3. 電器 (平板夾)')">
+                            <span class="time">22:00</span><span class="title">🛏️ 回飯店</span><span class="note">確認購物清單。</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
                 <summary>🏯 DAY 4 (5/2) 頂級馬肉與熊本城</summary>
                 <div class="details-content">
                     <div class="timeline">
-                        <div class="event highlight" onclick="openEventModalFromId('馬刺與燒鳥 Gourmand 三年坂', 'detail-gourmand')">
-                            <span class="time">12:00 - 13:30</span><span class="title">🐴 馬刺與燒鳥 Gourmand 三年坂 <span class="highlight-tag">★已訂位 12:00★</span></span><span class="note">品嚐頂級生馬肉與赤牛料理，絕佳體驗。</span>
+                        <div class="event" onclick="openEventModal('退房與開車南下', '提早離開久留米，開車南下前往熊本市區。')">
+                            <span class="time">10:00 - 11:45</span><span class="title">🚗 退房前往熊本</span>
                         </div>
-                        <div class="event" onclick="openEventModal('熊本城 & 城彩苑', '吃海膽餅，逛街買伴手禮。')">
-                            <span class="time">13:30 - 14:30</span><span class="title">🏯 熊本城 & 城彩苑</span>
+                        <div class="event highlight" onclick="openEventModalFromId('馬刺與燒鳥 Gourmand 三年坂', 'detail-gourmand')">
+                            <span class="time">12:00 - 13:30</span><span class="title">🐴 馬刺與燒鳥 Gourmand <span class="highlight-tag">已訂位 12:00</span></span><span class="note">頂級馬肉料理。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('熊本城 & 城彩苑', '參觀熊本城，並在城彩苑吃海膽餅、買伴手禮。<br>(也可逛到 4 點左右出發去神社再聚餐)')">
+                            <span class="time">13:30 - 14:30</span><span class="title">🏯 熊本城 (海膽餅)</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('別所琴平神社', '車程約 10 分鐘。<br>據說這裡的御朱印非常美，還有可愛的貓貓 🐱！')">
+                            <span class="time">14:30 - 15:00</span><span class="title">⛩️ 別所琴平神社</span><span class="note">尋找貓貓與御朱印。</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('飯店 Check in 休息', '熊本市區飯店，放個行李稍作休息。')">
+                            <span class="time">15:00 - 17:00</span><span class="title">🛏️ Check in 休息</span>
+                        </div>
+                        <div class="event highlight" onclick="openEventModalFromId('ONE STATION 酒店聚餐', 'detail-onestation')">
+                            <span class="time">17:30 - 19:00</span><span class="title">🍻 ONE STATION 聚餐 <span class="highlight-tag">已訂位 17:30</span></span>
+                        </div>
+                        <div class="event" onclick="openEventModal('回飯店', '享受在熊本的最後一個夜晚。')">
+                            <span class="time">19:30</span><span class="title">🛏️ 回飯店</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>🛫 DAY 5 (5/3) 順利返程</summary>
+                <div class="details-content">
+                    <div class="timeline">
+                        <div class="event" onclick="openEventModal('Check out', '確認所有行李都有帶上，準備去還車。')">
+                            <span class="time">08:00</span><span class="title">🧳 Check out</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('還車', '車程約 30 分鐘。<br>於機場周邊的營業所完成還車手續。')">
+                            <span class="time">09:20</span><span class="title">🚘 辦理還車手續</span>
+                        </div>
+                        <div class="event" onclick="openEventModal('班機起飛', '在機場買個早餐，帶著滿滿回憶平安回家！')">
+                            <span class="time">11:55</span><span class="title">✈️ 班機起飛</span><span class="note">機場買早餐。</span>
                         </div>
                     </div>
                 </div>
@@ -279,26 +352,29 @@
         </div>
 
         <div id="tab-map" class="tab-content">
-            <h3 style="margin-top:0; font-size:1.1rem; color:var(--text-main);">自駕神隊友：周邊快捷查詢</h3>
-            <p style="font-size:0.9rem; color:#6B7280; margin-top:0; margin-bottom:16px;">點擊按鈕將直接開啟 Google Maps App 幫您搜尋附近地標。</p>
-            
-            <div class="quick-search-grid">
-                <a href="https://www.google.com/maps/search/駐車場/" target="_blank" class="search-btn">🅿️ 找停車場</a>
-                <a href="https://www.google.com/maps/search/ガソリンスタンド/" target="_blank" class="search-btn">⛽ 找加油站</a>
-                <a href="https://www.google.com/maps/search/コンビニ/" target="_blank" class="search-btn">🏪 便利商店</a>
-                <a href="https://www.google.com/maps/search/スーパー/" target="_blank" class="search-btn">🛒 找大超市</a>
+            <div class="glass-card">
+                <h3 style="margin-top:0; font-size:1.1rem; color:var(--text-main);">自駕神隊友：周邊快捷查詢</h3>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0; margin-bottom:16px;">點擊按鈕將直接開啟 Google Maps App 幫您搜尋附近地標。</p>
+                <div class="quick-search-grid">
+                    <a href="https://www.google.com/maps/search/駐車場/" target="_blank" class="search-btn">🅿️ 找停車場</a>
+                    <a href="https://www.google.com/maps/search/ガソリンスタンド/" target="_blank" class="search-btn">⛽ 找加油站</a>
+                    <a href="https://www.google.com/maps/search/コンビニ/" target="_blank" class="search-btn">🏪 便利商店</a>
+                    <a href="https://www.google.com/maps/search/スーパー/" target="_blank" class="search-btn">🛒 找大超市</a>
+                </div>
             </div>
 
-            <h3 style="margin-top:24px; font-size:1.1rem; color:var(--text-main);">九州地圖瀏覽</h3>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1733221.7820138403!2d130.596!3d33.159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1711710000000!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="glass-card" style="padding: 16px;">
+                <h3 style="margin-top:0; margin-bottom:12px; font-size:1.1rem; color:var(--text-main); padding-left: 8px;">九州地圖瀏覽</h3>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1733221.7820138403!2d130.596!3d33.159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1711710000000!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="event-modal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeEventModal()">&times;</button>
+            <button class="modal-close" onclick="closeEventModal()">×</button>
             <div id="modal-title" class="modal-header">行程標題</div>
             <div id="modal-body">
                 </div>
@@ -306,22 +382,30 @@
     </div>
 
     <div style="display: none;">
-        
         <div id="detail-hakusui">
             <a href="https://goo.gl/maps/example" target="_blank" class="map-link-btn">📍 在 Google Map 中打開</a>
-            <p style="font-size: 0.95rem; color: #4B5563;">預約時間：12:30<br>人數：2人<br>備註：阿蘇知名的赤牛燒肉店。</p>
-            </div>
-
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：12:30<br>特色：阿蘇知名的赤牛燒肉店。</p>
+        </div>
+        <div id="detail-torigen">
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：18:00<br>位置：八女白壁老街步行 5 分鐘。</p>
+        </div>
+        <div id="detail-eeleight">
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：13:00</p>
+        </div>
+        <div id="detail-yakiniku">
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：19:00</p>
+        </div>
         <div id="detail-gourmand">
             <a href="https://maps.app.goo.gl/example" target="_blank" class="map-link-btn">📍 在 Google Map 中打開</a>
-            <p style="font-size: 0.95rem; color: #4B5563;">預約時間：12:00<br>預約席位：吧台區<br>必點：頂級生馬肉拼盤、阿蘇赤牛排。</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：12:00<br>必點：生馬肉拼盤、阿蘇赤牛排。</p>
             <img src="https://via.placeholder.com/400x250?text=訂位成功截圖" class="booking-img" alt="預約截圖">
         </div>
-
+        <div id="detail-onestation">
+            <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：17:30</p>
+        </div>
     </div>
 
     <script type="text/javascript">
-        // --- 視圖與頁籤切換邏輯 ---
         window.openApp = function(tabId) {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('content-view').style.display = 'block';
@@ -342,15 +426,12 @@
             document.getElementById('tab-btn-' + tabId).classList.add('active');
         };
 
-        // --- 彈出視窗邏輯 ---
-        // 簡單顯示文字的彈窗
         window.openEventModal = function(title, textContent) {
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-body').innerHTML = '<p style="color:#4B5563; line-height:1.6;">' + textContent + '</p>';
+            document.getElementById('modal-body').innerHTML = '<p style="color:var(--text-muted); line-height:1.6; font-size: 0.95rem;">' + textContent + '</p>';
             document.getElementById('event-modal').style.display = 'flex';
         };
 
-        // 從隱藏的 ID 區塊抓取豐富 HTML 的彈窗 (含圖片/按鈕)
         window.openEventModalFromId = function(title, elementId) {
             document.getElementById('modal-title').innerText = title;
             let contentHtml = document.getElementById(elementId) ? document.getElementById(elementId).innerHTML : '<p>無詳細資料</p>';
@@ -362,12 +443,10 @@
             document.getElementById('event-modal').style.display = 'none';
         };
 
-        // 點擊半透明黑色背景也能關閉視窗
         document.getElementById('event-modal').addEventListener('click', function(e) {
             if(e.target === this) closeEventModal();
         });
 
-        // --- 匯率轉換邏輯 ---
         let currentRate = 0.215; 
         let isJpyToTwd = true;   
 
