@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>九州 5 天 4 夜自駕遊</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #D32F2F; 
+            --primary-color: #D32F2F; /* 熊本經典紅 */
             --bg-color: #F8FAFC;
             /* 將卡片背景改為半透明，讓底下的背景圖可以透出來 */
             --card-bg: rgba(255, 255, 255, 0.85); 
@@ -45,12 +45,27 @@
         .menu-btn:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.25); }
         .menu-icon { font-size: 1.8rem; margin-right: 16px; background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 
-        /* ==================== 內頁視圖 (加入自訂背景圖) ==================== */
+        /* ==================== 內頁視圖 (修復：背景固定不動) ==================== */
         #content-view { 
             display: none; padding-top: 130px; padding-bottom: 40px; min-height: 100vh;
-            /* ★ 這裡套用了您專屬的資訊頁背景圖 ★ */
+            position: relative; /* ★ 為了讓偽元素固定背景生效 */
+        }
+
+        /* ★ 新增的固定背景濾鏡技術 ★ 
+          利用偽元素在 #content-view 後方固定背景圖，完美修復手機滑動問題
+        */
+        #content-view::before {
+            content: '';
+            position: fixed; /* ★ 固定在螢幕上，不隨滑動移動 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('bg_content.jpg'); 
-            background-size: cover; background-position: center; background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* ★ 放在內容下方 */
+            pointer-events: none; /* ★ 讓點擊可以穿過背景 */
         }
 
         .top-nav {
@@ -194,12 +209,36 @@
                     <div>
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛫 去程：TPE → KMJ</div>
                         <input type="checkbox" id="zoom-outbound" class="lightbox-zoom">
-                        <label for="zoom-outbound"><img src="flight_out.png" class="ticket-thumb"><div class="lightbox"><img src="flight_out.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
+                        <label for="zoom-outbound"><img src="flight_out.png" alt="去程航班" class="ticket-thumb"><div class="lightbox"><img src="flight_out.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
                     </div>
                     <div style="margin-top: 10px;">
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛬 回程：KMJ → TPE</div>
                         <input type="checkbox" id="zoom-return" class="lightbox-zoom">
-                        <label for="zoom-return"><img src="flight_return.png" class="ticket-thumb"><div class="lightbox"><img src="flight_return.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
+                        <label for="zoom-return"><img src="flight_return.png" alt="回程航班" class="ticket-thumb"><div class="lightbox"><img src="flight_return.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid #E5E7EB; padding-top: 20px;">
+                        <div style="font-weight: 700; margin-bottom: 8px; color: var(--text-main);">🎫 實體機票 1</div>
+                        <input type="checkbox" id="zoom-ticket1" class="lightbox-zoom">
+                        <label for="zoom-ticket1">
+                            <img src="ticket1.jpg" alt="機票 1" class="ticket-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800?text=找不到圖片+請確認GitHub檔名';">
+                            <div class="lightbox">
+                                <img src="ticket1.jpg" class="lightbox-img">
+                                <div class="close-hint">點擊任意處關閉</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <div style="font-weight: 700; margin-bottom: 8px; color: var(--text-main);">🎫 實體機票 2</div>
+                        <input type="checkbox" id="zoom-ticket2" class="lightbox-zoom">
+                        <label for="zoom-ticket2">
+                            <img src="ticket2.jpg" alt="機票 2" class="ticket-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800?text=找不到圖片+請確認GitHub檔名';">
+                            <div class="lightbox">
+                                <img src="ticket2.jpg" class="lightbox-img">
+                                <div class="close-hint">點擊任意處關閉</div>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -383,7 +422,6 @@
 
     <div style="display: none;">
         <div id="detail-hakusui">
-            <a href="https://goo.gl/maps/example" target="_blank" class="map-link-btn">📍 在 Google Map 中打開</a>
             <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：12:30<br>特色：阿蘇知名的赤牛燒肉店。</p>
         </div>
         <div id="detail-torigen">
