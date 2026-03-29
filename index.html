@@ -7,12 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #D32F2F; /* 熊本經典紅 */
+            --primary-color: #D32F2F; 
             --bg-color: #F8FAFC;
-            /* 將卡片背景改為半透明，讓底下的背景圖可以透出來 */
             --card-bg: rgba(255, 255, 255, 0.85); 
             --text-main: #1F2937;
-            --text-muted: #4B5563; /* 加深一點確保在半透明背景上清晰 */
+            --text-muted: #4B5563; 
             --timeline-color: #CBD5E1;
             --nav-height: 56px;
         }
@@ -45,27 +44,16 @@
         .menu-btn:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.25); }
         .menu-icon { font-size: 1.8rem; margin-right: 16px; background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 
-        /* ==================== 內頁視圖 (修復：背景固定不動) ==================== */
+        /* ==================== 內頁視圖 ==================== */
         #content-view { 
             display: none; padding-top: 130px; padding-bottom: 40px; min-height: 100vh;
-            position: relative; /* ★ 為了讓偽元素固定背景生效 */
+            position: relative; 
         }
 
-        /* ★ 新增的固定背景濾鏡技術 ★ 
-          利用偽元素在 #content-view 後方固定背景圖，完美修復手機滑動問題
-        */
         #content-view::before {
-            content: '';
-            position: fixed; /* ★ 固定在螢幕上，不隨滑動移動 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('bg_content.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1; /* ★ 放在內容下方 */
-            pointer-events: none; /* ★ 讓點擊可以穿過背景 */
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('bg_content.jpg'); background-size: cover; background-position: center;
+            z-index: -1; pointer-events: none; 
         }
 
         .top-nav {
@@ -127,14 +115,17 @@
         }
         .modal-content {
             background: white; border-radius: 24px; width: 100%; max-width: 400px;
-            max-height: 80vh; overflow-y: auto; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-height: 85vh; overflow-y: auto; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalPop 0.3s ease; position: relative;
         }
         @keyframes modalPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #9CA3AF; background: none; border: none; cursor: pointer; line-height: 1; }
+        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #9CA3AF; background: none; border: none; cursor: pointer; line-height: 1; z-index: 10; }
         .modal-header { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; padding-right: 30px;}
         
-        .map-link-btn { display: block; width: 100%; background: #E8F5E9; color: #2E7D32; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-bottom: 16px; border: 1px solid #C8E6C9;}
+        .map-link-btn { display: block; width: 100%; background: #E8F5E9; color: #2E7D32; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-bottom: 10px; border: 1px solid #C8E6C9;}
+        /* 訂購網站按鈕樣式 */
+        .ticket-link-btn { display: block; width: 100%; background: #E3F2FD; color: #1565C0; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-bottom: 16px; border: 1px solid #BBDEFB;}
+        
         .booking-img { width: 100%; border-radius: 12px; border: 1px solid #E5E7EB; margin-bottom: 16px; }
 
         /* ==================== 其他工具樣式 ==================== */
@@ -209,35 +200,27 @@
                     <div>
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛫 去程：TPE → KMJ</div>
                         <input type="checkbox" id="zoom-outbound" class="lightbox-zoom">
-                        <label for="zoom-outbound"><img src="flight_out.png" alt="去程航班" class="ticket-thumb"><div class="lightbox"><img src="flight_out.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
+                        <label for="zoom-outbound"><img src="flight_out.png" class="ticket-thumb"><div class="lightbox"><img src="flight_out.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
                     </div>
                     <div style="margin-top: 10px;">
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛬 回程：KMJ → TPE</div>
                         <input type="checkbox" id="zoom-return" class="lightbox-zoom">
-                        <label for="zoom-return"><img src="flight_return.png" alt="回程航班" class="ticket-thumb"><div class="lightbox"><img src="flight_return.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
+                        <label for="zoom-return"><img src="flight_return.png" class="ticket-thumb"><div class="lightbox"><img src="flight_return.png" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div></label>
                     </div>
-
                     <div style="margin-top: 20px; border-top: 1px solid #E5E7EB; padding-top: 20px;">
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--text-main);">🎫 實體機票 1</div>
                         <input type="checkbox" id="zoom-ticket1" class="lightbox-zoom">
                         <label for="zoom-ticket1">
                             <img src="ticket1.jpg" alt="機票 1" class="ticket-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800?text=找不到圖片+請確認GitHub檔名';">
-                            <div class="lightbox">
-                                <img src="ticket1.jpg" class="lightbox-img">
-                                <div class="close-hint">點擊任意處關閉</div>
-                            </div>
+                            <div class="lightbox"><img src="ticket1.jpg" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div>
                         </label>
                     </div>
-
                     <div style="margin-top: 10px;">
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--text-main);">🎫 實體機票 2</div>
                         <input type="checkbox" id="zoom-ticket2" class="lightbox-zoom">
                         <label for="zoom-ticket2">
                             <img src="ticket2.jpg" alt="機票 2" class="ticket-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800?text=找不到圖片+請確認GitHub檔名';">
-                            <div class="lightbox">
-                                <img src="ticket2.jpg" class="lightbox-img">
-                                <div class="close-hint">點擊任意處關閉</div>
-                            </div>
+                            <div class="lightbox"><img src="ticket2.jpg" class="lightbox-img"><div class="close-hint">點擊任意處關閉</div></div>
                         </label>
                     </div>
                 </div>
@@ -318,7 +301,7 @@
                         <div class="event" onclick="openEventModal('出發', '路上記得去超商買個早餐墊墊胃。')">
                             <span class="time">09:30</span><span class="title">🚗 出發</span><span class="note">超商買早餐。</span>
                         </div>
-                        <div class="event" onclick="openEventModal('河內藤園', '車程約 1.5hr。<br>⚠️ 務必於 12:00 前入園，準備好 QR Code 並補票。')">
+                        <div class="event" onclick="openEventModalFromId('河內藤園', 'detail-kawachi')">
                             <span class="time">11:00 - 12:00</span><span class="title">🌺 河內藤園</span><span class="note">12:00前入園掃QR Code。</span>
                         </div>
                         <div class="event highlight" onclick="openEventModalFromId('Eel eight 鰻魚飯', 'detail-eeleight')">
@@ -421,7 +404,16 @@
     </div>
 
     <div style="display: none;">
+        
+        <div id="detail-kawachi">
+            <a href="https://maps.app.goo.gl/1pMVEwTPLZxxjfFL7" target="_blank" class="map-link-btn">📍 在 Google Map 中打開</a>
+            <a href="https://webket.jp/pc/member/top?fc=52543&ac=9000&lang=0" target="_blank" class="ticket-link-btn">🎫 前往訂購網站</a>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">車程約 1.5hr。<br>⚠️ 務必於 12:00 前入園，準備好 QR Code 並補票。</p>
+            <img src="ticket_kawachi.png" class="booking-img" alt="門票截圖" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x250?text=找不到圖片，請確認 GitHub 檔名是否為 ticket_kawachi.png';">
+        </div>
+
         <div id="detail-hakusui">
+            <a href="https://goo.gl/maps/example" target="_blank" class="map-link-btn">📍 在 Google Map 中打開</a>
             <p style="font-size: 0.95rem; color: var(--text-muted);">預約時間：12:30<br>特色：阿蘇知名的赤牛燒肉店。</p>
         </div>
         <div id="detail-torigen">
