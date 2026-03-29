@@ -19,11 +19,11 @@
         * { box-sizing: border-box; font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 0; line-height: 1.5; overflow-x: hidden; }
 
-        /* ==================== 固定背景層 (修復滑動位移) ==================== */
+        /* ==================== 固定背景層 ==================== */
         #fixed-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: url('bg_content.jpg'); background-size: cover; background-position: center;
-            z-index: -999; display: none; /* 首頁時隱藏，進入內頁時顯示 */
+            z-index: -999; display: none; 
         }
 
         /* ==================== 首頁視圖 ==================== */
@@ -102,10 +102,10 @@
         .booking-img { width: 100%; border-radius: 12px; border: 1px solid #E5E7EB; margin-bottom: 16px; cursor: pointer; transition: 0.2s; }
         .booking-img:active { transform: scale(0.98); }
 
-        /* ★ 獨立的全域圖片放大層 (加入 touch-action: none 配合雙指縮放) ★ */
+        /* 全域圖片放大層 (加入 touch-action: none 配合雙指縮放) */
         #image-modal { z-index: 99999; background: rgba(0,0,0,0.9); flex-direction: column; touch-action: none; }
         .lightbox-img { max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); object-fit: contain; }
-        .close-hint { margin-top: 20px; color: white; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; }
+        .close-hint { margin-top: 20px; color: white; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; pointer-events: none; }
 
         /* ==================== 匯率與地圖樣式 ==================== */
         .converter-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -113,7 +113,6 @@
         .currency-symbol { font-weight: bold; color: var(--text-muted); margin-right: 12px; font-size: 1.1rem; }
         .input-group input { border: none; background: transparent; font-size: 1.4rem; width: 100%; outline: none; color: var(--text-main); font-weight: bold; }
         
-        /* ★ 修復：切換按鈕強制不換行 ★ */
         .swap-btn { background-color: #FFE3E3; color: var(--primary-color); border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
         
         .result-group { display: flex; align-items: center; padding: 12px 16px; background: rgba(255, 243, 224, 0.9); border-radius: 12px; color: #E65100; border: 1px solid rgba(230, 81, 0, 0.2);}
@@ -125,11 +124,11 @@
         .ticket-grid { display: grid; gap: 16px; }
     </style>
 </head>
-<body onclick="openApp('itinerary')">
+<body>
 
     <div id="fixed-bg"></div>
 
-    <div id="home-view">
+    <div id="home-view" onclick="openApp('itinerary')">
         <div class="home-header">
             <img src="title_tr.png" alt="熊本之旅" class="header-title-img">
             <p>2026.04.29 - 05.03<br>熊本 • 阿蘇 • 八女 • 福岡</p>
@@ -300,7 +299,7 @@
         <div id="tab-flights" class="tab-content">
             <div class="glass-card">
                 <h3 style="margin-top:0; font-size:1.1rem; color:var(--text-main);">電子機票檢視</h3>
-                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0;">💡 點擊圖片即可全螢幕放大查看</p>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0;">💡 點擊圖片即可全螢幕雙指放大查看</p>
                 <div class="ticket-grid">
                     <div>
                         <div style="font-weight: 700; margin-bottom: 8px; color: var(--primary-color);">🛫 去程：TPE → KMJ (07:30)</div>
@@ -337,7 +336,7 @@
         <div id="tab-map" class="tab-content">
             <div class="glass-card">
                 <h3 style="margin-top:0; font-size:1.1rem; color:var(--text-main);">自駕神隊友：周邊快捷查詢</h3>
-                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0; margin-bottom:16px;">點擊按鈕將直接開啟 Google Maps 搜尋附近地標。</p>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0; margin-bottom:16px;">點擊按鈕將直接開啟 Google Maps App 搜尋附近地標。</p>
                 <div class="quick-search-grid">
                     <a href="https://www.google.com/maps/search/駐車場" target="_blank" class="search-btn">🅿️ 找停車場</a>
                     <a href="https://www.google.com/maps/search/ガソリンスタンド" target="_blank" class="search-btn">⛽ 找加油站</a>
@@ -422,14 +421,14 @@
     <script type="text/javascript">
         window.openApp = function(tabId) {
             document.getElementById('home-view').style.display = 'none';
-            document.getElementById('fixed-bg').style.display = 'block'; // 顯示固定背景
+            document.getElementById('fixed-bg').style.display = 'block'; 
             document.getElementById('content-view').style.display = 'block';
             switchTab(tabId);
         };
 
         window.goHome = function() {
             document.getElementById('content-view').style.display = 'none';
-            document.getElementById('fixed-bg').style.display = 'none'; // 隱藏背景
+            document.getElementById('fixed-bg').style.display = 'none'; 
             document.getElementById('home-view').style.display = 'flex';
             window.scrollTo(0, 0);
         };
